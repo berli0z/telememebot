@@ -1,6 +1,7 @@
 # Telegram meme streamer
 
 Telegram meme streamer is a basic python package that includes a chatbot to send **memes**, which have to be approved in a control private group. Once approved, they are passed to a **redis** database, and then populate both a google drive and a **flask API** . You will need some prior knowledge in order to deploy successfully.
+![image](https://user-images.githubusercontent.com/40333748/103179092-d28adc80-4888-11eb-9c57-0049c3614186.png)
 
 
 # Installation
