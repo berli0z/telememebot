@@ -117,10 +117,10 @@ def upload_to_ftp(id, image):
     session = ftplib.FTP_TLS(FTP_URL,FTP_USER,FTP_PW)
     file = open('meme.jpg','rb')                  # file to send
     session.cwd('abybot')
-    session.storbinary('STOR '+id+'.png', file)     # send the file
+    session.storbinary('STOR '+id+'.jpg', file)     # send the file
     file.close()                                    # close file and FTP
     session.quit()
-    file_url = 'https://clusterduck.space/abybot/'+id+'.jpg'
+    file_url = 'http://mememanifesto.space/abybot/'+id+'.jpg'
     return file_url
 
 
