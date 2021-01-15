@@ -1,30 +1,29 @@
-categories_keyboard = [['1.Ragecomics/lolcats'],
-                       ['2.goldenage/impact/marketing'],
-                       ['3.relatable,twitter'],
-                       ['4.political/hyperstitional'],
-                       ['5.chad&virgin/queer/wojak/NPC'],
-                       ['6.me_irl/tumblr/instawave'],
-                       ['7.metameme/recursive'],
-                       ['8.esoteric/conspiracy'],
-                       ['9.surreal'],
-                       ['10.friedmemes/blacktwitter'],
-                       ['0.unknown']]
+categories_keyboard = [['1.RageComics/Unmotivational'],
+                    ['2.AdviceAnimals/Impact'],
+                    ['3.Relatable'],
+                    ['4.Hyperstitional'],
+                    ['5.Oomers/Chad&Virgin'],
+                    ['6.OriginalContent/Instawave'],
+                    ['7.Meta/Recursive'],
+                    ['8.Esoteric/Conspiracy'],
+                    ['9.Surreal'],
+                    ['10.Fried/Nuked'],
+                    ['0.Unknown']]
 
-start = '❇️ new meme submission ❇️\nCan you please name this meme?\n' + \
-        'remember that you can /cancel if you make a mistake\n\n'
+start = 'By pressing start, you are submitting a new meme. Now I will ask some simple questions.\nFirst, what is the name of the meme that you want to submit?'
 
 name = 'Please attach or forward a picture now. You can also forward from another app.'
 
-photo = 'lol! Which year has this meme been made? \nor /skip if you don\'t know.'
+photo = 'lol! Now, do you happen to know in which year this meme was made?\nclick /skip if you don\'t know.'
 
-year = 'Do you know the author(s) of the meme? \nor /skip if you don\'t know.'
+year = 'Do you happen to know the author of this meme?\nclick /skip if you don\'t know.'
 
-author = 'Do you know which platform does this come from? (Instagram, Facebook, 4chan..)\nor /skip if you don\'t know.'
+author = 'Do you know the Social Media Platform where this meme firstly appeared the most?\nclick /skip if you don\'t know.'
 
-platform = 'Can you please paste the link to the original meme? \nor /skip if you don\'t know.'
+platform = 'Can you please add a link that may give to the archive additional infos on this meme?\nclick /skip if you don\'t know.'
 
 link = 'Can you help us find the category for this meme?\nPress \"unknown\" if you don\'t know.\n\nIf the keyboard' \
-       'disappears, you can open it again with the button on your telegram bar, or just type in the number of the category.'
+       ' disappears, you can open it again with the button on your telegram bar, or just type in the number of the category.'
 
 category = 'Thank you and bye! Press /start if you want to send more memes!'
 
