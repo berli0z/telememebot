@@ -19,7 +19,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from telegram import InlineKeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackQueryHandler)
-
+import ftplib
 import txt
 from config import *
 
@@ -111,6 +111,18 @@ def upload_to_drive(id, image):
     logger.info("File saved to drive, id: %s", file.get("id"))
     return file.get("id")
 
+def upload_to_ftp(id, image):
+    meme = bot.getFile(image)
+    meme.download('meme.jpg')
+    session = ftplib.FTP_TLS(FTP_URL,FTP_USER,FTP_PW)
+    file = open('meme.jpg','rb')                  # file to send
+    session.cwd('abybot')
+    session.storbinary('STOR '+id+'.png', file)     # send the file
+    file.close()                                    # close file and FTP
+    session.quit()
+    file_url = 'https://clusterduck.space/abybot/'+id+'.jpg'
+    return file_url
+
 
 # append accepted meme data to google spreadsheet
 def append_to_gsheet(id):
@@ -121,10 +133,11 @@ def append_to_gsheet(id):
     platform = str(r.hget(id, 'platform').decode('utf-8'))
     link = str(r.hget(id, 'link').decode('utf-8'))
     index_row = str(len(gsheet.sheet1.get_all_records()) + 2)
-    drive_image_id = upload_to_drive(id, image)
-    drive_url = "https://drive.google.com/open?id=" + drive_image_id
+    # drive_image_id = upload_to_drive(id, image)
+    # drive_url = "https://drive.google.com/open?id=" + drive_image_id
+    file_url = upload_to_ftp(id, image)
     category = str(r.hget(id, 'category').decode('utf-8'))
-    data_list = [[id, name, drive_url, year, author, platform, link, category]]
+    data_list = [[id, name, file_url, year, author, platform, link, category]]
     gsheet.sheet1.update('A' + index_row + ':H' + index_row, data_list)
     return print("saved to google sheet!")
 
@@ -161,7 +174,6 @@ def spam(data=data):
                               "Link: " + data['link'] + "\n" \
                                                         "Category: " + data['category'] + "\n"
     bot.send_photo(chat_id=CHANNEL_ID, photo=data['image'], caption=text, reply_markup=reply_markup)
-
 
 def start(update, context):
     data.clear()
@@ -205,7 +217,6 @@ def skip_year(update, context):
     update.message.reply_text(txt.year)
 
     return AUTHOR
-
 
 def author(update, context):
     user = update.message.from_user
@@ -255,7 +266,6 @@ def skip_link(update, context):
     logger.info("User %s did not send a link.", user.first_name)
     update.message.reply_text(txt.link, reply_markup=ReplyKeyboardMarkup(categories_keyboard, one_time_keyboard=True))
     return CATEGORY
-
 
 def category(update, context):
     user = update.message.from_user
