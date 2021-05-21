@@ -6,7 +6,7 @@ from flask import Flask
 from flask_httpauth import HTTPBasicAuth
 from flask_restful import Resource, Api
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_cors import CORS
 from config import DOC_URL, WAIT_SECONDS, user, pwd
 
 
@@ -19,6 +19,8 @@ def update():
 
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/memes": {"origins": "*"}})
+
 auth = HTTPBasicAuth()
 users = {
     user: generate_password_hash(pwd)
@@ -33,7 +35,6 @@ def verify_password(username, password):
 
 
 api = Api(app)
-
 
 class Memes(Resource):
     @auth.login_required
